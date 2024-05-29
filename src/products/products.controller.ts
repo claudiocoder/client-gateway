@@ -25,8 +25,11 @@ export class ProductsController {
   }
 
   @Get()
-  findAllProducts(@Query() paginationDto: PaginationDto){
-    return this.productsClient.send({ cmd: 'find_all_product' }, { ...paginationDto });
+  findAllProducts(@Query() paginationDto: PaginationDto) {
+    return this.productsClient.send(
+      { cmd: 'find_all_product' },
+      { ...paginationDto },
+    );
   }
 
   @Get(':id')
