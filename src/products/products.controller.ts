@@ -12,7 +12,6 @@ import {
   Query,
 } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
-import { parse } from 'path';
 import { catchError, firstValueFrom } from 'rxjs';
 import { CreateProductDto, PaginationDto, UpdateProductDto } from 'src/common';
 import { PRODUCT_SERVICE } from 'src/config';
@@ -21,7 +20,9 @@ import { PRODUCT_SERVICE } from 'src/config';
 export class ProductsController {
   constructor(
     @Inject(PRODUCT_SERVICE) private readonly productsClient: ClientProxy,
-  ) {}
+  ) {
+    this.productsClient = productsClient;
+  }
 
   @Post()
   createProduct(@Body() createProductDto: CreateProductDto) {
